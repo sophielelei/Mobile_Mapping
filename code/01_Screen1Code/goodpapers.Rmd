@@ -1,0 +1,38 @@
+---
+title: "good paper check"
+output: html_notebook
+---
+
+# load library
+
+```{r, message=FALSE}
+rm(list=ls())
+library(shiny)   ;  library(tidyverse)
+library(DT)      ;  library(rmdformats)
+library(stringr) ;  library(shinyWidgets)
+library(RISmed)  ;  library(bibliometrix)
+library(bib2df)  ;  library(knitr)
+library(magrittr);  library(shinythemes)
+
+```
+
+
+# 
+
+```{r}
+load("~/Desktop/mobile_money/M_mapping/data/03_Screen1Backup/MainScreeningData_Screen1_20240907-1603.RData")
+```
+
+```{r}
+names(data_bib)
+
+```
+```{r}
+goodpapers <- data_bib[ , c(42,1,6,60:68)]
+```
+
+
+```{r}
+table(goodpapers$Screen1_GoldStar)
+```
+
