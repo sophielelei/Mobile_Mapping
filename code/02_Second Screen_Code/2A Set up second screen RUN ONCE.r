@@ -5,7 +5,7 @@
 #     screening the social code 
 #-----------------------------------------------------------------------------------
 
-Workingfile <- "./data/04_Data-ready02nd-screen/MainScreeningData_Screen1_complete.RData"
+Workingfile <- "./data/04_Data-ready-2nd-screen/MainScreeningData_Screen1_complete.RData"
 load(Workingfile)
 bib_all       <- data_bib; rm(data_bib)
 
@@ -16,25 +16,26 @@ bib_all       <- data_bib; rm(data_bib)
 # If we ticked screen2_social as TRUE then we wanted to keep the paper
 # 
 # FOR YOU. you want screen1_rejectnotentreP to be false (spelt correctly)
-data_bib      <- bib_all[which(bib_all$Screen2_Social == TRUE),]
+data_bib      <- bib_all[which(bib_all$Screen1_RejectNOTEntreP == FALSE),]
 
 #-----------------------------------------------------------------------------------
 # set up new columns. One for each thing you want to store.
 # these are your output columns for the shiny app
 #  keep these three the same
+#  If you want a TRUE/FALSE, set to NA. 
+#  If you want it to store numbers or text,set to "
 #-----------------------------------------------------------------------------------
 data_bib$Screen2_Assessed <- NA
 data_bib$Screen2_Reject   <- NA
-data_bib$Screen2_methods  <- ""
-data_bib$Screen2_topic    <- ""     
 
-data_bib$Screen2_Planning <- NA
-data_bib$Screen2_assessment <- ""
-data_bib$Screen2_before     <- "" 
-data_bib$Screen2_during     <- ""
-data_bib$Screen2_impact     <- ""
-data_bib$Screen2_geo        <- ""
-data_bib$Screen2_flood      <- ""
+data_bib$Screen2_Methods     <- ""
+data_bib$Screen2_MainTopic   <- ""   
+data_bib$Screen2_Location    <- ""
+data_bib$Screen2_Buzzwords   <- ""
+data_bib$Screen2_Tropes      <- "" 
+data_bib$Screen2_TypesEntreP <- ""
+data_bib$Screen2_TypesMM     <- ""
+data_bib$Screen2_TypesTech   <- ""
 
 #  keep this the same
 data_bib$Screen2_Notes      <- ""
@@ -43,6 +44,9 @@ data_bib$Screen2_Notes      <- ""
 #----------------------------
 # and save to the data file
 #----------------------------
+#Workingfile <- "./data/04_Data-ready-2nd-screen/MainScreeningData_Screen1_complete.RData"
+
+save(data_bib, file = "./data/04_Data-ready-2nd-screen/MainScreeningData_Screen2_PreProcessed.RData")
 save(data_bib, file = "./data/MainScreeningData_Screen2.rData")
 
 
