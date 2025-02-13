@@ -43,101 +43,141 @@ data_bib <- data_bib[with(data_bib, order(Screen2_Assessed)), ]
 #=======================================================================
 # Highlighting Rules
 #=======================================================================
-wordHighlightyellow <- function(SuspWord,colH = "#FFE9A8") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightgreen <- function(SuspWord,colH = "#BEDDBA") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightblue <- function(SuspWord,colH = "#A3C4D9") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightred <- function(SuspWord,colH = "#CFA6B6") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightdarkblue <- function(SuspWord,colH = "#BAB4D4") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightgrey <- function(SuspWord,colH = grey(0.9)) {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
-wordHighlightpurple <- function(SuspWord,colH = "#D4B9DA") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightyellow   <- function(SuspWord,colH = "#fdf29a") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightgreen    <- function(SuspWord,colH = "#d4f9c6") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightblue     <- function(SuspWord,colH = "#b7e9f6") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightred      <- function(SuspWord,colH = "#fbd1d1") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightpurple   <- function(SuspWord,colH = "#e7d0f5") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightgrey     <- function(SuspWord,colH = grey(0.9)) {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
+wordHighlightorange   <- function(SuspWord,colH = "#ffd497") {paste0('<span style="background-color:',colH,'">',SuspWord,'</span>')}
 
 
 
-helenhighlight <- function(YourData){
-  
-  #Meta - GREY
-  YourData %<>% str_replace_all(regex("policy", ignore_case = TRUE), wordHighlightgrey)
-  YourData %<>% str_replace_all(regex("climate", ignore_case = TRUE), wordHighlightgrey)
-  YourData %<>% str_replace_all(regex("climate change", ignore_case = TRUE), wordHighlightgrey)
-  
-  #Assessment Type - YELLOW
-  YourData %<>% str_replace_all(regex("risk perception", ignore_case = TRUE), wordHighlightyellow)
-  YourData %<>% str_replace_all(regex("risk assessment", ignore_case = TRUE), wordHighlightyellow)
-  YourData %<>% str_replace_all(regex("perception", ignore_case = TRUE), wordHighlightyellow)
-  YourData %<>% str_replace_all(regex("assessment", ignore_case = TRUE), wordHighlightyellow)
-  YourData %<>% str_replace_all(regex("vulnerability", ignore_case = TRUE), wordHighlightyellow)
-  
-  #Impacts - GREEN
-  YourData %<>% str_replace_all(regex("impacting", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("impacts", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("impact", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("killed", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("deaths", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("death", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("damage", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("disaster", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("economic", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("fatalities", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("casualties", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("community", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("infrastructure", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("psych", ignore_case = TRUE), wordHighlightgreen)
-  YourData %<>% str_replace_all(regex("health", ignore_case = TRUE), wordHighlightgreen)
-  
-  #Method - BLUE
-  YourData %<>% str_replace_all(regex("modelling", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("modeling", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("models", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("model", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("gis ", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("remote sensing", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("focus group", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("simulation", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("machine learning", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("interview", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("survey", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("media", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("twitter", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("crowd", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("facebook", ignore_case = TRUE), wordHighlightblue)
-  YourData %<>% str_replace_all(regex("tweet", ignore_case = TRUE), wordHighlightblue)
-  
-  #Type of Flash Flood
-  YourData %<>% str_replace_all(regex("landslide", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("landslides", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("mudslide", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("mudslides", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("river", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("dam ", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("snow", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("pluvial", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("cloudburst", ignore_case = TRUE), wordHighlightred)
-  YourData %<>% str_replace_all(regex("cloud", ignore_case = TRUE), wordHighlightred)
-  # YourData %<>% str_replace_all(regex("rainfall",ignore_case = TRUE), wordHighlightred)
-  # YourData %<>% str_replace_all(regex(" rain",ignore_case = TRUE), wordHighlightred)
-  
-  
-  #Timing 
-  YourData %<>% str_replace_all(regex("forecast", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("ad hoc", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("post hoc", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("early", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("warning", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("EWS", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("response", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("detection", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("emergency", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("risk management", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("management", ignore_case = TRUE), wordHighlightdarkblue)
-  YourData %<>% str_replace_all(regex("action", ignore_case = TRUE), wordHighlightdarkblue)
-  
 
-  #Geography
-  YourData %<>% str_replace_all(regex("urban", ignore_case = TRUE), wordHighlightpurple)
-  YourData %<>% str_replace_all(regex("rural", ignore_case = TRUE), wordHighlightpurple)
-  YourData %<>% str_replace_all(regex("indigenous", ignore_case = TRUE), wordHighlightpurple)
+sophiehighlight <- function(YourData){
+   
+   #Financial Terms
+   YourData %<>% str_replace_all(regex("pesa", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("money", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("cash", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("credit", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("currency", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("funds", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("payment", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("remittance", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("wealth", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("income", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("savings", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("transaction", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("wage gap", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("wage", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("financial access", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("financial service", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("financial inclusion", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("banking", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("financial", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("economy", ignore_case = TRUE), wordHighlightyellow)
+   YourData %<>% str_replace_all(regex("funding", ignore_case = TRUE), wordHighlightyellow)
+   
+   
+   #Tech 
+   YourData %<>% str_replace_all(regex("mobile", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("digitization", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("technology", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("smartphones", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("phone", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("tech", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("technologies", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("digital", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("online", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("knowledge networks", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("internet", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("Digital", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("ict", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("ICT", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("e-commerce", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("artificial intelligence", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("platform", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("platforms", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("social media", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("computer", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("laptop", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("laptops", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("tool", ignore_case = TRUE), wordHighlightgreen)   
+   YourData %<>% str_replace_all(regex("tools", ignore_case = TRUE), wordHighlightgreen)
+   YourData %<>% str_replace_all(regex("network", ignore_case = TRUE), wordHighlightgreen)   
 
-  
+   #Geography
+   YourData %<>% str_replace_all(regex("Kenya", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Africa", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("East-Africa", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Sub-Saharan Africa", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("sub saharan", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Sub Sahara", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("West", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("North", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("South", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("East", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Global South", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Global North", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Uganda", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Tanzania", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Rwanda", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Ethiopia", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Nigeria", ignore_case = TRUE), wordHighlightblue)
+   YourData %<>% str_replace_all(regex("Ghana", ignore_case = TRUE), wordHighlightblue)
+   
+   #Gender
+   YourData %<>% str_replace_all(regex("gender", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("female", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("women", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("girl", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("female employment", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("women's income", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("equality", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("feminism", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("empowerment", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("equity", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("female-led", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("women rights", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("education", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("gender mainstreaming", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("Gen", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("Fem", ignore_case = TRUE), wordHighlightpurple)
+   YourData %<>% str_replace_all(regex("Gir", ignore_case = TRUE), wordHighlightpurple)
+
+   #EnreP
+   YourData %<>% str_replace_all(regex("self-employment", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("entrepreneurial", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("entrepreneur", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("entrepreneurs", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("entrepreneurship", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("entrepr", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("service", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("start-ups", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("startup", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("grassroot", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("small-scale", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("large-scale", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("enterprise", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("companies", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("compan", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("business", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("trade", ignore_case = TRUE), wordHighlightorange)
+   YourData %<>% str_replace_all(regex("work", ignore_case = TRUE), wordHighlightorange)
+   
+   #Red Flags
+   YourData %<>% str_replace_all(regex("systematic review", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("clinic", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("agri", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("farmer", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("herder", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("pasture", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("maternal", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("neo", ignore_case = TRUE), wordHighlightred)
+   YourData %<>% str_replace_all(regex("health", ignore_case = TRUE), wordHighlightred)
+   
+
 }
 
 #=======================================================================
@@ -147,11 +187,11 @@ ui <- fluidPage(
   tags$head(tags$style(
     HTML('
          #sidebar {
-            background-color: #5c5c5f;
+            background-color: #9c8484;
          }
          
          #table {
-            background-color: #F9F6EE;
+            background-color: #f4f3ef;
          }
         '))),
   #--------------------------------------------------------------------
@@ -353,7 +393,7 @@ server <-  function(input,output,session){
            #-----------------------------------------------------
            # choose that row in the table
            YourData <- data_bib[values$count,c("TI","AB")]
-           YourData2 <- helenhighlight(YourData)
+           YourData2 <- sophiehighlight(YourData)
            
            #-----------------------------------------------------
            # Output to data_bib         
@@ -424,7 +464,7 @@ server <-  function(input,output,session){
         # Or put the final row
         else{
           YourData <- data_bib[ nrow(data_bib),c("TI","AB")]
-          YourData2 <- helenhighlight(YourData)
+          YourData2 <- sophiehighlight(YourData)
           
           #-----------------------------------------------------
           # Output to data_bib         
