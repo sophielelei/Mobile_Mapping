@@ -192,7 +192,7 @@ ui <- fluidPage(
          
          #table {
             background-color: #f4f3ef;
-            font-size: 14px; /* Increase font size here */
+            font-size: 12px; /* Increase font size here */
          }
 
         '))),
