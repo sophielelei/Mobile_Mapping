@@ -180,6 +180,8 @@ sophiehighlight <- function(YourData){
 
 }
 
+#Check up to here (everything works!) - March 31 2025 
+
 #=======================================================================
 # GUI function
 #=======================================================================
@@ -212,11 +214,10 @@ ui <- fluidPage(
         materialSwitch(inputId="discardButton", label="Not Relevant",value=FALSE,width="100%",status="danger")),
       
       #--------------------------------------------------------------------
-      # Main Topic
-      ## TO DO - format this better
+      # DFI Theme
       fluidRow(
-        checkboxGroupButtons(inputId = "topicGroup", 
-                           label = h5("Main Topic"), 
+        checkboxGroupButtons(inputId = "DFI_Theme", 
+                           label = h5("DFI Theme"), 
                            choices = c("Mobile Money" = 1, 
                                        "Gender" = 2, 
                                        "Financial Inclusion" = 3,
@@ -229,123 +230,196 @@ ui <- fluidPage(
                                          style = "color: steelblue")),
                            status = "info",
                            selected = NULL)),
-     
-        #--------------------------------------------------------------------
-        # Paper "Tropes"
-      fluidRow(
-        checkboxGroupButtons("tropeGroup", 
-                           label = h5("'Tropes' in Abstract"), 
-                           choices = list("Gender Imbalance" = 1, 
-                                          "Development" = 2, 
-                                          "Mass Communication" = 3, 
-                                          "International Markets" = 4),
-                           status = "info",
-                           selected = NULL)),
-        
-        #--------------------------------------------------------------------
-        # During the flood
-      fluidRow(
-      #buzzwords   
-       checkboxGroupInput("buzzGroup", 
-                           label = h5("Buzzwords"), 
-                           choices = list("Policy" = 1, 
-                                          "Economic" = 2, 
-                                          "Climate" = 3,
-                                          "Culture" = 4,
-                                          "Sustainable Devel" = 5,
-                                          "Inclusive Devel"= 6,
-                                          "Rural" = 7,
-                                          "Urban" = 8,
-                                          "Other [leave a note]" = 9),
-                           selected = NULL),
-        
-        #--------------------------------------------------------------------
-        # Methods
-        checkboxGroupInput("methodsGroup", 
-                           label = h5("Methods"), 
-                           choices = list("Literature Review" = 1, 
-                                          "Interviews/surveys"= 2,
-                                          "Social media or crowd sourcing" = 3,
-                                          "Machine learning" = 4, 
-                                          "Mapping & GIS" = 5,
-                                          "Simulations or scenarios" = 6,
-                                          "Community guidance & tools" = 7),
-                           selected = NULL)),
-        
-        #--------------------------------------------------------------------
-        # Geography
-        fluidRow(
-          column(width = 6,
-          selectInput("geoSelect", 
-                    label = h5("Geography"), 
-                    choices = list("None" = 0,
-                                   "East-Africa" = 1, 
-                                   "Rest of Africa" = 2, 
-                                   "Not Africa 'Global South'" = 3), 
-                    selected = NULL)),        
-
-        #--------------------------------------------------------------------
-        # Tech Type
-        selectInput("techSelect", 
-                    label = h5("Select Tech Type"), 
-                    choices = list("Not specified" = 1, 
-                                    "Digital Platforms" = 2, 
-                                    "Phone" = 3,
-                                    "Computer" = 4),
-                    selected = 1)),
       #--------------------------------------------------------------------
-      # Types of EntreP
+      # GAD Theme
       fluidRow(
-         column(width = 6,
-                selectInput("entrePSelect", 
-                            label = h5("Types of EntreP"), 
-                            choices = list("Not specified" = 0,
-                                           "Ag" = 1,
-                                           "Hair" = 2, 
-                                           "Film/Creative" = 3, 
-                                           "Ebay Seller" = 4), 
-                            selected = NULL)),        
-         
-         #--------------------------------------------------------------------
-         # Types of Mobile Money (MM)
-         selectInput("mmSelect", 
-                     label = h5("Select Tech of MM"), 
-                     choices = list("Not specified" = 1, 
-                                    "MPessa" = 2, 
-                                    "Borrow" = 3,
-                                    "Remittance" = 4, 
-                                    "Credit" = 5),
-                     selected = 1)),
-      #--------------------------------------------------------------------
-      # Notes
-      hr(),
-      fluidRow(textInput(inputId = "notesField", label = "Notes", value = "")),
+         checkboxGroupButtons(inputId = "GAD_Theme", 
+                              label = h5("GAD Theme"), 
+                              choices = c("Changing Power Relations Between Women & Men" = 1, 
+                                          "Structural Barriers to Financial Inclusion" = 2, 
+                                          "Enabling Agency and Empowerment" = 3,
+                                          "Transformation of Gender Roles" = 4,
+                                          "Access to and Control Over Resources" = 5, 
+                                          "Risk, Security, and Violence" = 6, 
+                                          "Gender & Youth" = 7, 
+                                          "Gender & Elderly" = 8),
+                              checkIcon = list(
+                                 yes = tags$i(class = "fa fa-circle", 
+                                              style = "color: steelblue"),
+                                 no = tags$i(class = "fa fa-circle-o", 
+                                             style = "color: steelblue")),
+                              status = "info",
+                              selected = NULL)),
       
       #--------------------------------------------------------------------
-      # The next button
-      hr(),
-      fluidRow(actionButton("nextButton", "Next", width = "100px", 
-                            style="color: #fff; background-color: #4bbf73; border-color: #2e6da4"))
-    ),
-    
-    #--------------------------------------------------------------------
-    # Where the main data resides. 
-    # The table itself and whether it has been pre-screened
-    # Additional information for screening
-    mainPanel(
-      DT::dataTableOutput("table"),
-      hr(),
-      # More info on screening classifications
-      verbatimTextOutput("moreInfo"),
-      htmlOutput("count"),
-      htmlOutput("total")
-    ), 
-    
-    #--------------------------------------------------------------------
-    # Where the sidebar sits (left or right). 
-    position="right"
-  )
-)
+      # Inclusive Development Theme
+      fluidRow(
+         checkboxGroupButtons(inputId = "ID", 
+                              label = h5("Inclusive Development"), 
+                              choices = c("Economic Empowerment" = 1, 
+                                          "Gender Equality & Social Inclusion (GESI)" = 2, 
+                                          "Poverty Reducation" = 3,
+                                          "Informal Economy" = 4,
+                                          "Social Norms & Cultural Factors" = 5),
+                              checkIcon = list(
+                                 yes = tags$i(class = "fa fa-circle", 
+                                              style = "color: steelblue"),
+                                 no = tags$i(class = "fa fa-circle-o", 
+                                             style = "color: steelblue")),
+                              status = "info",
+                              selected = NULL)),
+      
+      #--------------------------------------------------------------------
+      # Financial Inclusion Theme
+      fluidRow(
+         checkboxGroupButtons(inputId = "FI", 
+                              label = h5("Financial Inclusion"), 
+                              choices = c("Access to Financial Services" = 1, 
+                                          "Usage & Adoption Patterns" = 2, 
+                                          "Affordability & Costs" = 3,
+                                          "Financial Capability & Literacy" = 4,
+                                          "Trust, Privacy & Security" = 5), 
+                              checkIcon = list(
+                                 yes = tags$i(class = "fa fa-circle", 
+                                              style = "color: steelblue"),
+                                 no = tags$i(class = "fa fa-circle-o", 
+                                             style = "color: steelblue")),
+                              status = "info",
+                              selected = NULL)),     
+      
+      #--------------------------------------------------------------------
+      # Mobile Money (MM) Type
+      fluidRow(
+         #MM Type    
+         checkboxGroupInput("MM_Type", 
+                            label = h5("MM Type"), 
+                            choices = list("MPesa" = 1, 
+                                           "Borrow" = 2, 
+                                           "Remittance" = 3,
+                                           "Credit" = 4,
+                                           "Women's Savings Group Use" = 5,
+                                           "Transactions"= 6,
+                                           "Access to Government Money" = 7,
+                                           "Access to NGOs" = 8,
+                                           "Platform Visibility (e.g., Influencer)" = 9, 
+                                           "Access to International Markets" = 10, 
+                                           "Link to Advertising/Communication" = 11, 
+                                           "Other [leave a note]" = 12, 
+                                           "Not Specified" = 13),
+                            selected = NULL)),
+         #--------------------------------------------------------------------
+         # Tech Type
+         fluidRow(
+            #Tech Type    
+            checkboxGroupInput("Tech_Type", 
+                               label = h5("Tech Type"), 
+                               choices = list("Phone" = 1, 
+                                              "Computer" = 2, 
+                                              "Digital Platforms (i.e. websites)" = 3,
+                                              "Not Specified" = 4),
+                               selected = NULL)),
+            #--------------------------------------------------------------------
+            # EntreP Type
+            fluidRow(
+               #EntreP Type    
+               checkboxGroupInput("EntreP_Type", 
+                                  label = h5("EntreP Type"), 
+                                  choices = list("MicroEntrepreneurs, Small-Scale Traders, Market Stalls(Using MM for transactions)" = 1, 
+                                                 "SMEs (e.g., Salons, Own Establishment Buildings)" = 2, 
+                                                 "Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for group savings, loans, collective investments)" = 3,
+                                                 "Individual Influencer/Uber driver, etc. (Accessing new entrepreneurship opportunities becasue of mobile platforms;livelihoods dependent on MM" = 4,
+                                                 "Big Corporations" = 5),
+                                  selected = NULL)),
+               
+             
+               #--------------------------------------------------------------------
+               # EntreP Sector
+               fluidRow(
+                  #EntreP Sector    
+                  checkboxGroupInput("EntreP_Sec", 
+                                     label = h5("EntreP Sector"), 
+                                     choices = list("Agriculture" = 1, 
+                                                    "Hair" = 2, 
+                                                    "Film/Creative" = 3,
+                                                    "Handicrafts" = 4,
+                                                    "Not Specified" = 5),
+                                     selected = NULL),
+                  
+                  #--------------------------------------------------------------------
+                  # Methods
+                  checkboxGroupInput("methodsGroup", 
+                                     label = h5("Methods"), 
+                                     choices = list("Literature Review" = 1, 
+                                                    "Interviews/surveys"= 2,
+                                                    "Social media or crowd sourcing" = 3,
+                                                    "Machine learning" = 4, 
+                                                    "Mapping & GIS" = 5,
+                                                    "Simulations or scenarios" = 6,
+                                                    "Community guidance & tools" = 7),
+                                     selected = NULL)),  
+               
+               #--------------------------------------------------------------------
+               # Geography
+               fluidRow(
+                  column(width = 6,
+                         selectInput("geoSelect", 
+                                     label = h5("Geography"), 
+                                     choices = list("East-Africa" = 1, 
+                                                    "Rest of Africa" = 2, 
+                                                    "Not Africa 'Global South'" = 3,
+                                                    "Study is clearly based in rural location" = 4, 
+                                                    "Study is clearly based in a city" = 5), 
+                                     selected = NULL))),        
+                  
+               
+                  #--------------------------------------------------------------------
+                  # Other Themes
+                  fluidRow(
+                     #Other   
+                     checkboxGroupInput("Other_Themes", 
+                                        label = h5("Other Themes"), 
+                                        choices = list("Training/Education" = 1, 
+                                                       "Policy" = 2, 
+                                                       "Climate Change" = 3,
+                                                       "Sustainability" = 4),
+                                        selected = NULL)),
+        
+        
+        #--------------------------------------------------------------------
+        # Notes
+        hr(),
+        fluidRow(textInput(inputId = "notesField", label = "Notes", value = "")),
+        
+        #--------------------------------------------------------------------
+        # The next button
+        hr(),
+        fluidRow(actionButton("nextButton", "Next", width = "100px", 
+                              style="color: #fff; background-color: #4bbf73; border-color: #2e6da4"))
+                  ),
+        
+        #--------------------------------------------------------------------
+        # Where the main data resides. 
+        # The table itself and whether it has been pre-screened
+        # Additional information for screening
+        mainPanel(
+           DT::dataTableOutput("table"),
+           hr(),
+           # More info on screening classifications
+           verbatimTextOutput("moreInfo"),
+           htmlOutput("count"),
+           htmlOutput("total")
+        ), 
+        
+        #--------------------------------------------------------------------
+        # Where the sidebar sits (left or right). 
+        position="right"
+               )
+            )
+        
+        
+      #Need to change the label names below fix
+      #the bracket things above and match the labels with the buttons from 2A set up!!! 
+      #March 31 2025 - 1:20PM 
 
 #=======================================================================
 # Server
@@ -368,15 +442,27 @@ server <-  function(input,output,session){
     {input$nextButton}, #ignoreNULL = FALSE, ignoreInit = FALSE,
     {
       updateMaterialSwitch(session=session, inputId="discardButton",value=FALSE)
-      updateCheckboxGroupButtons(session=session, inputId="topicGroup", selected = character(0))
-      updateCheckboxGroupButtons(session=session, inputId="tropeGroup", selected = character(0))
-      updateCheckboxGroupInput(session=session, inputId="buzzGroup", selected = 0)
+      updateCheckboxGroupButtons(session=session, inputId="DFI_Theme", selected = character(0))
+      updateCheckboxGroupButtons(session=session, inputId="GAD_Theme", selected = character(0))
+      updateCheckboxGroupButtons(session=session, inputId="ID", selected = character(0))
+      updateCheckboxGroupButtons(session=session, inputId="FI", selected = character(0))
+      updateCheckboxGroupInput(session=session, inputId="MM_Type", selected = 0)
+      updateCheckboxGroupInput(session=session, inputId="Tech_Type", selected = 0)
+      updateCheckboxGroupInput(session=session, inputId="EntreP_Type", selected = 0)
+      updateCheckboxGroupInput(session=session, inputId="EntreP_Sec", selected = 0)
       updateCheckboxGroupInput(session=session, inputId="methodsGroup", selected = 0)
-      updateSelectInput(session=session, inputId="geoSelect", selected = as.numeric(data_bib$Screen2_Location)[values$count+1])
-      updateSelectInput(session=session, inputId="techSelect", selected = as.numeric(data_bib$Screen2_TypesTech)[values$count+1])
-      updateSelectInput(session=session, inputId="entrePSelect", selected = as.numeric(data_bib$Screen2_TypesEntreP)[values$count+1])
-      updateSelectInput(session=session, inputId="mmSelect", selected = as.numeric(data_bib$Screen2_TypesMM)[values$count+1])
+      updateSelectInput(session=session, inputId="geoSelect", selected = as.numeric(data_bib$Screen2_Geography)[values$count+1])
       updateTextInput(session=session, inputId="notesField", value = "")
+      
+      #Below is from old code. 
+      
+      #updateCheckboxGroupInput(session=session, inputId="buzzGroup", selected = 0)
+      #updateCheckboxGroupInput(session=session, inputId="methodsGroup", selected = 0)
+      #updateSelectInput(session=session, inputId="geoSelect", selected = as.numeric(data_bib$Screen2_Location)[values$count+1])
+      #updateSelectInput(session=session, inputId="techSelect", selected = as.numeric(data_bib$Screen2_TypesTech)[values$count+1])
+      #updateSelectInput(session=session, inputId="entrePSelect", selected = as.numeric(data_bib$Screen2_TypesEntreP)[values$count+1])
+      #updateSelectInput(session=session, inputId="mmSelect", selected = as.numeric(data_bib$Screen2_TypesMM)[values$count+1])
+      #updateTextInput(session=session, inputId="notesField", value = "")
       
       save(list="data_bib",file=Workingfile)
 
@@ -400,58 +486,76 @@ server <-  function(input,output,session){
            data_bib$Screen2_Reject      [values$count-1] <<- input$discardButton
            
 
-           if(length(input$topicGroup) <= 0){
-              data_bib$Screen2_MainTopic     [values$count-1] <<- 0
+           if(length(input$DFI_Theme) <= 0){
+              data_bib$Screen2_DFI           [values$count-1] <<- 0
            } else{
-              data_bib$Screen2_MainTopic     [values$count-1] <<- str_c(input$topicGroup, collapse = '_')
+              data_bib$Screen2_DFI[values$count-1] <<- str_c(input$DFI_Theme, collapse = '_')
            }
            
-           if(length(input$tropeGroup) <= 0){
-              data_bib$Screen2_Tropes     [values$count-1] <<- 0
+           if(length(input$GAD_Theme) <= 0){
+              data_bib$Screen2_GAD        [values$count-1] <<- 0
            } else{
-              data_bib$Screen2_Tropes     [values$count-1] <<- str_c(input$tropeGroup, collapse = '_')
+              data_bib$Screen2_GAD     [values$count-1] <<- str_c(input$GAD_Theme, collapse = '_')
            }
+           
+           if(length(input$ID) <= 0){
+              data_bib$Screen2_IncDev        [values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_IncDev     [values$count-1] <<- str_c(input$ID, collapse = '_')
+           }
+           
+           if(length(input$FI) <= 0){
+              data_bib$Screen2_FinancInc        [values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_FinancInc     [values$count-1] <<- str_c(input$FI, collapse = '_')
+           }
+           
+           if(length(input$MM_Type) <= 0){t
+              data_bib$Screen2_MMType[values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_MMType[values$count-1] <<- input$MM_Type
+           }
+         
+           if(length(input$Tech_Type) <= 0){t
+              data_bib$Screen2_TechType[values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_TechType[values$count-1] <<- input$Tech_Type
+           }  
+           
+           if(length(input$EntreP_Type) <= 0){t
+              data_bib$Screen2_EntrePType[values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_EntrePType[values$count-1] <<- input$EntreP_Type
+           }
+           
+           if(length(input$EntreP_Sec) <= 0){t
+              data_bib$Screen2_EntrePSec[values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_EntrePSec[values$count-1] <<- input$EntreP_Sec
+           }
+           if(length(input$methodsGroup) <= 0){
+              data_bib$Screen2_Methods     [values$count-1] <<- 0
+           } else{
+              data_bib$Screen2_Methods     [values$count-1] <<- str_c(input$methodsGroup, collapse = '_')
+           }  
+           if(length(input$geoSelect) <= 0){
+              data_bib$Screen2_Geography       [values$count-1] <<- 0
+           } else {
+              data_bib$Screen2_Geography       [values$count-1] <<- input$geoSelect
+           }
+           
+           
            
            if(length(input$buzzGroup) <= 0){
               data_bib$Screen2_Buzzwords     [values$count-1] <<- 0
            } else{
               data_bib$Screen2_Buzzwords     [values$count-1] <<- str_c(input$buzzGroup, collapse = '_')
            }
-           
-           if(length(input$methodsGroup) <= 0){
-              data_bib$Screen2_Methods     [values$count-1] <<- 0
-           } else{
-              data_bib$Screen2_Methods     [values$count-1] <<- str_c(input$methodsGroup, collapse = '_')
-           }
-           
-           if(length(input$geoSelect) <= 0){
-              data_bib$Screen2_Location       [values$count-1] <<- 0
-           } else {
-              data_bib$Screen2_Location       [values$count-1] <<- input$geoSelect
-           }
-           
-           if(length(input$techSelect) <= 0){t
-             data_bib$Screen2_TypesTech[values$count-1] <<- 0
-           } else{
-             data_bib$Screen2_TypesTech[values$count-1] <<- input$techSelect
-           }
-           
-           if(length(input$entrePSelect) <= 0){t
-              data_bib$Screen2_TypesEntreP[values$count-1] <<- 0
-           } else{
-              data_bib$Screen2_TypesEntreP[values$count-1] <<- input$entrePSelect
-           }
-           
-           if(length(input$mmSelect) <= 0){t
-              data_bib$Screen2_TypesMM[values$count-1] <<- 0
-           } else{
-              data_bib$Screen2_TypesMM[values$count-1] <<- input$mmSelect
-           }
-           
-           
            data_bib$Screen2_Notes       [values$count-1] <<- input$notesField
            return(YourData2)
         }
+
+
         #-----------------------------------------------------
         # Or put the final row
         else{
@@ -462,16 +566,23 @@ server <-  function(input,output,session){
           # Output to data_bib         
           data_bib$Screen2_Assessed   [nrow(data_bib)] <<- TRUE
           data_bib$Screen2_Reject     [nrow(data_bib)] <<- input$discardButton
-          data_bib$Screen2_MainTopic  [nrow(data_bib)] <<- str_c(input$topicGroup, collapse = '_')
-          data_bib$Screen2_Tropes     [nrow(data_bib)] <<- input$tropeSelect
-          data_bib$Screen2_Buzzwords  [nrow(data_bib)] <<- str_c(input$buzzGroup, collapse = '_')
+          data_bib$Screen2_DFI        [nrow(data_bib)] <<- str_c(input$DFI_Theme, collapse = '_')
+          data_bib$Screen2_GAD        [nrow(data_bib)] <<- str_c(input$GAD_Theme, collapse = '_')
+          data_bib$Screen2_MMType     [nrow(data_bib)] <<- str_c(input$MM_Type, collapse = '_')
+          data_bib$Screen2_TechType   [nrow(data_bib)] <<- str_c(input$Tech_Type, collapse = '_')
+          data_bib$Screen2_FinancInc  [nrow(data_bib)] <<- str_c(input$FI, collapse = '_')
           data_bib$Screen2_Methods    [nrow(data_bib)] <<- str_c(input$methodsGroup, collapse = '_')
-          data_bib$Screen2_Location   [nrow(data_bib)] <<- input$geoSelect
-          data_bib$Screen2_TypesEntreP[nrow(data_bib)] <<- input$entrePSelect
-          data_bib$Screen2_TypesTech  [nrow(data_bib)] <<- input$techSelect
-          data_bib$Screen2_TypesMM    [nrow(data_bib)] <<- input$mmSelect
-          
+          data_bib$Screen2_EntrePType [nrow(data_bib)] <<- str_c(input$EntreP_Type, collapse = '_')
+          data_bib$Screen2_EntrePSec  [nrow(data_bib)] <<- str_c(input$EntreP_Sec, collapse = '_')
+          data_bib$Screen2_Other      [nrow(data_bib)] <<- str_c(input$Other_Themes, collapse = '_')
+          data_bib$Screen2_Geography  [nrow(data_bib)] <<- input$geoSelect
           data_bib$Screen2_Notes      [nrow(data_bib)] <<- input$notesField
+          
+          
+          #data_bib$Screen2_TypesEntreP[nrow(data_bib)] <<- input$entrePSelect
+          #data_bib$Screen2_TypesTech  [nrow(data_bib)] <<- input$techSelect
+          #data_bib$Screen2_TypesMM    [nrow(data_bib)] <<- input$mmSelect
+          
           return(YourData2)
         }
     })  

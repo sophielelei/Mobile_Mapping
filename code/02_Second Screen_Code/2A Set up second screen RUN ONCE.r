@@ -28,14 +28,18 @@ data_bib      <- bib_all[which(bib_all$Screen1_RejectNOTEntreP == FALSE),]
 data_bib$Screen2_Assessed <- NA
 data_bib$Screen2_Reject   <- NA
 
+
+data_bib$Screen2_DFI         <- ""   
+data_bib$Screen2_GAD         <- ""
+data_bib$Screen2_IncDev      <- ""
+data_bib$Screen2_FinancInc   <- ""
+data_bib$Screen2_MMType      <- ""
+data_bib$Screen2_TechType    <- ""
+data_bib$Screen2_EntrePType  <- ""
+data_bib$Screen2_EntrePSec   <- ""
 data_bib$Screen2_Methods     <- ""
-data_bib$Screen2_MainTopic   <- ""   
-data_bib$Screen2_Location    <- ""
-data_bib$Screen2_Buzzwords   <- ""
-data_bib$Screen2_Tropes      <- "" 
-data_bib$Screen2_TypesEntreP <- ""
-data_bib$Screen2_TypesMM     <- ""
-data_bib$Screen2_TypesTech   <- ""
+data_bib$Screen2_Geography   <- ""
+data_bib$Screen2_Other       <- ""
 
 #  keep this the same
 data_bib$Screen2_Notes      <- ""
