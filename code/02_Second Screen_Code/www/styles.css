@@ -1,0 +1,17 @@
+
+
+/* Main table style */
+table {
+            background-color: #f4f3ef;
+            font-size: 12px; /* Increase font size here */
+         }
+
+/* Accordian params */
+.accordion .card-header {
+  cursor: pointer;
+}
+
+.accordion .card-header .card-title {
+  display: block;
+  width: 100%;
+}         
