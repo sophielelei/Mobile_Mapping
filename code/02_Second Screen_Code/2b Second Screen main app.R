@@ -13,7 +13,7 @@ rm(list=ls())
 # Adjust this to the appropriate folder on your system
 #-----------------------------------------------------------------------
 Workingfile <- "~/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2.rData"
-Workingfile <- "/Users/hlg5155/Documents/GitHub/greatrex-lab/Project Bibliometric Mapping/Mobile_Mapping/data/MainScreeningData_Screen2.rData"
+#Workingfile <- "/Users/hlg5155/Documents/GitHub/greatrex-lab/Project Bibliometric Mapping/Mobile_Mapping/data/MainScreeningData_Screen2.rData"
 
 #-----------------------------------------------------------------------
 # Make sure you have these libraries
@@ -313,7 +313,7 @@ ui = dashboardPage(
                                   #      status = "primary",
                                   shinyWidgets::pickerInput(
                                      inputId = "Button_Gender",
-                                     label = "GENDER :",
+                                     label = "GAD THEME:",
                                      choices = c("Changing power relations between women & men" = 1, 
                                                  "Structural barriers to financial inclusion" = 2, 
                                                  "Enabling agency / empowerment" = 3,
@@ -322,6 +322,19 @@ ui = dashboardPage(
                                                  "Risk, security, and violence" = 6, 
                                                  "Gender & Youth" = 7, 
                                                  "Gender & Elderly" = 8),
+                                     multiple = TRUE,
+                                     width = "fit",
+                                     options = list( `multiple-separator` = " | ",
+                                                     `actions-box` = TRUE,
+                                                     `selected-text-format` = "count",
+                                                     `pickerOptions(container` = "body")
+                                  ),
+                                  shinyWidgets::pickerInput(
+                                     inputId = "Button_Tech",
+                                     label = "TECH TYPE:",
+                                     choices = c("Phone" = 1, 
+                                                 "Computer" = 2, 
+                                                 "Not Specified" = 3),
                                      multiple = TRUE,
                                      width = "fit",
                                      options = list( `multiple-separator` = " | ",
@@ -338,7 +351,7 @@ ui = dashboardPage(
                                   #   "This is some text!"
                                   shinyWidgets::pickerInput(
                                      inputId = "Button_IncDev",
-                                     label = h5("INCLUSIVE. DEVELOPMENT:"), 
+                                     label = h5("INCLUSIVE DEVELOPMENT:"), 
                                      choices = c("Economic Empowerment", 
                                                  "Gender Equality & Social Inclusion (GESI)", 
                                                  "Poverty Reducation",
@@ -376,7 +389,73 @@ ui = dashboardPage(
                                                      `selected-text-format` = "count",
                                                      `pickerOptions(container` = "body")
                                   ),
+                                 
+                                  #ENTREPRENEUR TYPE WIDGET
+                                   shinyWidgets::pickerInput(
+                                     inputId = "EntreP_Type",
+                                     label = "Entrepreneur Type:",
+                                     choices = c("Microentrepreneurs, Small-Scale Traders, Market Stalls (Using MM for transactions)" = 1, 
+                                                 "SMEs(e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, social media, advertising, brand partnerships)" = 2, 
+                                                 "Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for group savings, loans, collective investments)" = 3,
+                                                 "Accessing new entrepreneurship opportunities becasue of mobile platforms;livelihoods dependent on MM (e.g Individual Influencer/Uber driver)" = 4,
+                                                 "Bigger Corperations" = 5), 
+                                     multiple = TRUE,
+                                     width = "fit",
+                                     options = list( `multiple-separator` = " | ",
+                                                     `actions-box` = TRUE,
+                                                     `selected-text-format` = "count",
+                                                     `pickerOptions(container` = "body")
+                                  ),
+                                 
+                                  #ENTREPRENEUR SECTOR WIDGET 
+                                   shinyWidgets::pickerInput(
+                                     inputId = "EntreP_Sec",
+                                     label = "Entrepreneur Sector:",
+                                     choices = c("Agriculture" = 1, 
+                                                 "Beauty/Wellness" = 2, 
+                                                 "Creative/Film" = 3,
+                                                 "Handicrafts" = 4),
+                                     multiple = TRUE,
+                                     width = "fit",
+                                     options = list( `multiple-separator` = " | ",
+                                                     `actions-box` = TRUE,
+                                                     `selected-text-format` = "count",
+                                                     `pickerOptions(container` = "body")
+                                  ),
                                   
+                                  #GEOGRAPHY WIDGET 
+                                  shinyWidgets::pickerInput(
+                                     inputId = "geoSelect",
+                                     label = "Geography:",
+                                     choices = c("East-Africa" = 1, 
+                                                 "Rest of Africa" = 2, 
+                                                 "Not Africa 'Global South'" = 3,
+                                                 "Study is clearly based in a rural location" = 4, 
+                                                 "Study is clearly based in a city" = 5, 
+                                                 "Not specified"= 6),
+                                     multiple = TRUE,
+                                     width = "fit",
+                                     options = list( `multiple-separator` = " | ",
+                                                     `actions-box` = TRUE,
+                                                     `selected-text-format` = "count",
+                                                     `pickerOptions(container` = "body")
+                                  ),
+                                 
+                                  #OTHER WIDGET 
+                                  shinyWidgets::pickerInput(
+                                     inputId = "Button_Other",
+                                     label = "Other Themes:",
+                                     choices = c("Training/Education" = 1, 
+                                                 "Policy" = 2, 
+                                                 "Climate Change" = 3,
+                                                 "Sustainability" = 4),
+                                     multiple = TRUE,
+                                     width = "fit",
+                                     options = list( `multiple-separator` = " | ",
+                                                     `actions-box` = TRUE,
+                                                     `selected-text-format` = "count",
+                                                     `pickerOptions(container` = "body")
+                                  ),
                                   #--------------------------------------------------------------------
                                   # Notes
                                   hr(),
@@ -425,8 +504,9 @@ server <-  function(input,output,session){
          updateCheckboxGroupButtons(session=session, inputId="Button_Theme", selected = character(0))
          updateCheckboxGroupButtons(session=session, inputId="Button_Methods", selected = character(0))
          updateCheckboxGroupButtons(session=session, inputId="Button_Gender", selected = character(0))
+         updateCheckboxGroupButtons(session=session, inputId="Button_Tech", selected = character(0))
          updateCheckboxGroupButtons(session=session, inputId="Button_MMType", selected = character(0))
-         updateVirtualSelect(session=session, inputId="MM_Type", selected = NULL)
+         updateCheckboxGroupButtons(session=session, inputId="Button_Other", selected = character(0))
          updateCheckboxGroupInput(session=session, inputId="Button_IncDev", selected = 0)
          updateCheckboxGroupInput(session=session, inputId="EntreP_Type", selected = 0)
          updateCheckboxGroupInput(session=session, inputId="EntreP_Sec", selected = 0)
@@ -523,14 +603,6 @@ server <-  function(input,output,session){
             } else {
                data_bib$Screen2_Geography       [values$count-1] <<- input$geoSelect
             }
-            
-            
-            
-            if(length(input$buzzGroup) <= 0){
-               data_bib$Screen2_Buzzwords     [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_Buzzwords     [values$count-1] <<- str_c(input$buzzGroup, collapse = '_')
-            }
             data_bib$Screen2_Notes       [values$count-1] <<- input$notesField
             return(YourData2)
          }
@@ -583,22 +655,13 @@ server <-  function(input,output,session){
           Tropes  - selct (if any) tropes paper is trying to convey (i.e. women can't use tech - gender imbalance)
           Buzzwords - select all buzzwords papers has. 
           ", 
-            "Flash Flood Type Definitions: 
-          Not specified - flood type not definied or explicitly stated, unclear
-          Rainfall - runoff, cloudburst, pluvial, caused by heavy precipitation (no river involved)
-          Dam/levee breach - anything to do with dams or levees
-          Speedy river - river height changes rapidly, fast onset riverine flood
-          Landslide/mudslide - explicitly mentions landslide/mudslide or debris in water
-          Snowmelt - caused by melting snow
-          ",
-            "General Planning - select if the paper is not explicitly related to a single event and is about preparing or planning for future events",
-            "If the paper is about impacts in general, not related to a specific event, make sure 'general' is clicked before selecting the impacts",
-            "General Science - select if paper is about science-based general planning - ie developing geophysical risk maps",
+         "Inference - If a paper infers a certain theme but does not explicitely says it, record it in the notes"
+            ,
             sep="\n")
    })
    hr()
    output$count <- renderUI({ HTML(paste("You have reviewed", (values$count - 2) ,"papers in this session")) })
-   output$total <- renderUI({HTML(paste("In total, we have reviewed", (sum(data_bib$Screen3_Assessed_v2, na.rm = TRUE)), "of", (length(data_bib$Screen3_Assessed_v2))))})
+   output$total <- renderUI({HTML(paste("In total, we have reviewed", (sum(data_bib$Screen2_Assessed, na.rm = TRUE)), "of", (length(data_bib$Screen2_Assessed))))})
 }
 
 #=======================================================================

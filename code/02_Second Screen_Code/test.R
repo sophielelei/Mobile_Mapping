@@ -40,6 +40,7 @@ ui <- dashboardPage(
             collapsed = FALSE,
             solidHeader = TRUE,
             "This is some more text!"
+            
          )
       )
    ),
