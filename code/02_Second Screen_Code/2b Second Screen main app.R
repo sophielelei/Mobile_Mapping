@@ -3,18 +3,21 @@
 rm(list=ls())
 #=======================================================================
 # HOW TO RUN
-# Press Ctrl-A to select all, then run.  Shiny should start up
+# Click run app on the top right
 # Click "next" once to precede to screening. 
 # When you get bored close it down and everything is already saved - then upload to git
 # To start again, just select all and run again.
 #=======================================================================
 
 #-----------------------------------------------------------------------
-# Adjust this to the appropriate folder on your system
+# AS A ONE OFF - CHANGE THIS TO THE FILE YOU ARE WORKING ON
+# easiest way is to copy paste file.choose() into the console
+# choose the file and it will type out the location
 #-----------------------------------------------------------------------
-Workingfile <- "~/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2.rData"
+#Workingfile <- "~/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2.rData"
 #Workingfile <- "/Users/hlg5155/Documents/GitHub/greatrex-lab/Project Bibliometric Mapping/Mobile_Mapping/data/MainScreeningData_Screen2.rData"
-
+Workingfile <- "REPLACE WITH YOURS"
+   
 #-----------------------------------------------------------------------
 # Make sure you have these libraries
 #-----------------------------------------------------------------------
@@ -183,8 +186,10 @@ ui = dashboardPage(
    controlbar=dashboardControlbar(width=575,collapsed=FALSE,overlay=FALSE,
                                   
                                   hr(),
+                                  
+                                  ## Button_Discard
                                   materialSwitch(
-                                     inputId = "Button_discard",
+                                     inputId = "Button_Discard",
                                      label = "CLICK IF PAPER ISN'T RELEVANT",
                                      value = FALSE,
                                      status = "danger"
@@ -195,14 +200,14 @@ ui = dashboardPage(
                                   # CHOOSE YOUR FAVOURITE 
                                   # AND COMMENT OUT/REMOVE THE REST
                                   #--------------------------------------------
-                                  # Methods 1, virtualselectinput
+                                  ## Button_Methods
                                   virtualSelectInput(
-                                     inputId = "Button_methods",
+                                     inputId = "Button_Methods",
                                      label = "METHODS:",
                                      choices = list(
                                         "CONCEPTUAL" = c(
-                                           "Literature review",
-                                           "Framework/Opinion-piece"
+                                           "Literature review"=1,
+                                           "Framework/Opinion-piece"=2
                                         ),
                                         "QUALITATIVE" = c(
                                            "Interview",
@@ -230,71 +235,13 @@ ui = dashboardPage(
                                      width = "100%",   
                                      showValueAsTags = TRUE
                                   ),
-                                  # # Methods 2
-                                  # pickerInput(
-                                  #    inputId = "Button_methods2",
-                                  #    label = "PRIMARY METHODS :",
-                                  #    choices = list(
-                                  #       "CONCEPTUAL" = c(
-                                  #          "Literature review",
-                                  #          "Framework/Opinion-piece"
-                                  #       ),
-                                  #       "QUALITATIVE" = c(
-                                  #          "Interview",
-                                  #          "Survey",
-                                  #          "Focus-groups",
-                                  #          "Economic Research games"
-                                  #       ),
-                                  #       "ARCHIVE/TEXT BASED" = c(
-                                  #          "Archival research (newspapers etc)",
-                                  #          "Policy Analysis",
-                                  #          "Content/Thematic Analysis"
-                                  #       ),
-                                  #       "STATISTICS" = c(
-                                  #          "Randomised Controlled Trial",
-                                  #          "Other statistical analysis (regression etc)"
-                                  #       ),
-                                  #       "MODELLING/GIS" = c(
-                                  #          "Computer simulation/modelling",
-                                  #          "GIS/mapping",
-                                  #          "Big-data analysis (social media)"
-                                  #       ) 
-                                  #    ),
-                                  #    multiple = TRUE,
-                                  #    width = "fit",
-                                  #    options = list(multiple-separator = " | ",
-                                  #                   actions-box = TRUE,
-                                  #                   selected-text-format= "count",
-                                  #                   pickerOptions(container = "body"))
-                                  # ),
-                                  
-                                  ## Methods 3
-                                  # multiInput(
-                                  #    inputId = "button_methods3", 
-                                  #    label = "PRIMARY METHODS:",
-                                  #    choices = c(
-                                  #       "Literature review",
-                                  #       "Framework or Opinion-piece",
-                                  #       "Interview",
-                                  #       "Survey",
-                                  #       "Focus-group",
-                                  #       "Economic Research games",
-                                  #       "Archival (newspapers etc)",
-                                  #       "Policy Analysis",
-                                  #       "Content/Thematic Analysis",
-                                  #       "Randomised Controlled Trial",
-                                  #       "Statistics (regression etc)",
-                                  #       "Computer simulation/modelling",
-                                  #       "Big-data analysis (social media)",
-                                  #       "GIS/mapping"),
-                                  #    width = "550px"
-                                  # ),
                                   
                                   #--------------------------------------------
-                                  # THEME
+                                  # DFI THEME
                                   #--------------------------------------------
+                                  # Button_DFITheme
                                   checkboxGroupButtons(
-                                     inputId = "Button_Theme",
+                                     inputId = "Button_DFITheme",
                                      label = "DFI THEME:",
                                      choices = c("Mobile Money", 
                                                  "Gender",
@@ -311,8 +258,13 @@ ui = dashboardPage(
                                   #      title = "--- Gender -------------------------------------------",
                                   #      collapsed = TRUE,
                                   #      status = "primary",
+                                  
+                                  #--------------------------------------------
+                                  # GAD THEME
+                                  #--------------------------------------------
+                                  # Button_GAD
                                   shinyWidgets::pickerInput(
-                                     inputId = "Button_Gender",
+                                     inputId = "Button_GAD",
                                      label = "GAD THEME:",
                                      choices = c("Changing power relations between women & men" = 1, 
                                                  "Structural barriers to financial inclusion" = 2, 
@@ -329,8 +281,13 @@ ui = dashboardPage(
                                                      `selected-text-format` = "count",
                                                      `pickerOptions(container` = "body")
                                   ),
+                                  
+                                  #--------------------------------------------
+                                  # TECHNOLOGY TYPE
+                                  #--------------------------------------------
+                                  # Button_TechType
                                   shinyWidgets::pickerInput(
-                                     inputId = "Button_Tech",
+                                     inputId = "Button_TechType",
                                      label = "TECH TYPE:",
                                      choices = c("Phone" = 1, 
                                                  "Computer" = 2, 
@@ -349,9 +306,13 @@ ui = dashboardPage(
                                   #   status = "warning",
                                   #   collapsed = FALSE,
                                   #   "This is some text!"
+                                  #--------------------------------------------
+                                  # INCLUSIVE DEVELOPMENT THEMES
+                                  #--------------------------------------------
+                                  # Button_IncDev
                                   shinyWidgets::pickerInput(
                                      inputId = "Button_IncDev",
-                                     label = h5("INCLUSIVE DEVELOPMENT:"), 
+                                     label = "Inclusive Dev", 
                                      choices = c("Economic Empowerment", 
                                                  "Gender Equality & Social Inclusion (GESI)", 
                                                  "Poverty Reducation",
@@ -366,9 +327,14 @@ ui = dashboardPage(
                                   ),
                                   
                                   #)
+                                  
+                                  #--------------------------------------------
+                                  # MOBILE MONEY TYPE
+                                  #--------------------------------------------
+                                  # Button_MMType
                                   shinyWidgets::pickerInput(
                                      inputId = "Button_MMType",
-                                     label = h5("FINANCE/MOBILE-MONEY:"), 
+                                     label = "Mobile Money", 
                                      choices = list("MPesa" = 1, 
                                                     "Borrow" = 2, 
                                                     "Remittance" = 3,
@@ -389,10 +355,12 @@ ui = dashboardPage(
                                                      `selected-text-format` = "count",
                                                      `pickerOptions(container` = "body")
                                   ),
-                                 
+                                  #--------------------------------------------
                                   #ENTREPRENEUR TYPE WIDGET
+                                  #--------------------------------------------
+                                  # Button_EntrePType
                                    shinyWidgets::pickerInput(
-                                     inputId = "EntreP_Type",
+                                     inputId = "Button_EntrePType",
                                      label = "Entrepreneur Type:",
                                      choices = c("Microentrepreneurs, Small-Scale Traders, Market Stalls (Using MM for transactions)" = 1, 
                                                  "SMEs(e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, social media, advertising, brand partnerships)" = 2, 
@@ -406,10 +374,12 @@ ui = dashboardPage(
                                                      `selected-text-format` = "count",
                                                      `pickerOptions(container` = "body")
                                   ),
-                                 
+                                  #--------------------------------------------
                                   #ENTREPRENEUR SECTOR WIDGET 
+                                  #--------------------------------------------
+                                  # Button_EntrePSec
                                    shinyWidgets::pickerInput(
-                                     inputId = "EntreP_Sec",
+                                     inputId = "Button_EntrePSec",
                                      label = "Entrepreneur Sector:",
                                      choices = c("Agriculture" = 1, 
                                                  "Beauty/Wellness" = 2, 
@@ -423,9 +393,12 @@ ui = dashboardPage(
                                                      `pickerOptions(container` = "body")
                                   ),
                                   
-                                  #GEOGRAPHY WIDGET 
+                                  #--------------------------------------------
+                                  # GEOGRAPHY WIDGET 
+                                  #--------------------------------------------
+                                  # Button_Geography
                                   shinyWidgets::pickerInput(
-                                     inputId = "geoSelect",
+                                     inputId = "Button_Geography",
                                      label = "Geography:",
                                      choices = c("East-Africa" = 1, 
                                                  "Rest of Africa" = 2, 
@@ -458,12 +431,10 @@ ui = dashboardPage(
                                   ),
                                   #--------------------------------------------------------------------
                                   # Notes
-                                  hr(),
                                   fluidRow(textInput(inputId = "notesField", label = "Notes", value = "")),
                                   
                                   #--------------------------------------------------------------------
                                   # The next button
-                                  hr(),
                                   fluidRow(actionButton("nextButton", "Next", width = "100px", 
                                                         style="color: #fff; background-color: #4bbf73; border-color: #2e6da4"))
    ),
@@ -500,29 +471,18 @@ server <-  function(input,output,session){
       # figure out these update buttons)
       {input$nextButton}, #ignoreNULL = FALSE, ignoreInit = FALSE,
       {
-         updateMaterialSwitch(session=session, inputId="Button_discard",value=FALSE)
-         updateCheckboxGroupButtons(session=session, inputId="Button_Theme", selected = character(0))
-         updateCheckboxGroupButtons(session=session, inputId="Button_Methods", selected = character(0))
-         updateCheckboxGroupButtons(session=session, inputId="Button_Gender", selected = character(0))
-         updateCheckboxGroupButtons(session=session, inputId="Button_Tech", selected = character(0))
-         updateCheckboxGroupButtons(session=session, inputId="Button_MMType", selected = character(0))
-         updateCheckboxGroupButtons(session=session, inputId="Button_Other", selected = character(0))
-         updateCheckboxGroupInput(session=session, inputId="Button_IncDev", selected = 0)
-         updateCheckboxGroupInput(session=session, inputId="EntreP_Type", selected = 0)
-         updateCheckboxGroupInput(session=session, inputId="EntreP_Sec", selected = 0)
-         updateCheckboxGroupInput(session=session, inputId="methodsGroup", selected = 0)
-         updateSelectInput(session=session, inputId="geoSelect", selected = as.numeric(data_bib$Screen2_Geography)[values$count+1])
+         updateMaterialSwitch(session=session, inputId="Button_Discard",value=FALSE)
+         updateVirtualSelect(session=session, inputId="Button_Methods", selected = character(0))
+         updateCheckboxGroupButtons(session=session, inputId="Button_DFITheme", selected = character(0))
+         updatePickerInput(session=session, inputId="Button_GAD", selected = character(0))
+         updatePickerInput(session=session, inputId="Button_TechType", selected = character(0))
+         updatePickerInput(session=session, inputId="Button_IncDev", selected = 0)
+         updatePickerInput(session=session, inputId="Button_MMType", selected = character(0))
+         updatePickerInput(session=session, inputId="Button_EntrePType", selected = 0)
+         updatePickerInput(session=session, inputId="Button_EntrePSec", selected = 0)
+         updatePickerInput(session=session, inputId="Button_Geography", selected = 0)
+         updatePickerInput(session=session, inputId="Button_Other", selected = 0)
          updateTextInput(session=session, inputId="notesField", value = "")
-         
-         #Below is from old code. 
-         
-         #updateCheckboxGroupInput(session=session, inputId="buzzGroup", selected = 0)
-         #updateCheckboxGroupInput(session=session, inputId="methodsGroup", selected = 0)
-         #updateSelectInput(session=session, inputId="geoSelect", selected = as.numeric(data_bib$Screen2_Location)[values$count+1])
-         #updateSelectInput(session=session, inputId="techSelect", selected = as.numeric(data_bib$Screen2_TypesTech)[values$count+1])
-         #updateSelectInput(session=session, inputId="entrePSelect", selected = as.numeric(data_bib$Screen2_TypesEntreP)[values$count+1])
-         #updateSelectInput(session=session, inputId="mmSelect", selected = as.numeric(data_bib$Screen2_TypesMM)[values$count+1])
-         #updateTextInput(session=session, inputId="notesField", value = "")
          
          save(list="data_bib",file=Workingfile)
          
@@ -543,66 +503,72 @@ server <-  function(input,output,session){
             #-----------------------------------------------------
             # Output to data_bib         
             data_bib$Screen2_Assessed    [values$count-1] <<- TRUE
-            data_bib$Screen2_Reject      [values$count-1] <<- input$discardButton
+            data_bib$Screen2_Reject      [values$count-1] <<- input$Button_Discard
             
-            
-            if(length(input$DFI_Theme) <= 0){
-               data_bib$Screen2_DFI           [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_DFI[values$count-1] <<- str_c(input$DFI_Theme, collapse = '_')
-            }
-            
-            if(length(input$GAD_Theme) <= 0){
-               data_bib$Screen2_GAD        [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_GAD     [values$count-1] <<- str_c(input$GAD_Theme, collapse = '_')
-            }
-            
-            if(length(input$ID) <= 0){
-               data_bib$Screen2_IncDev        [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_IncDev     [values$count-1] <<- str_c(input$ID, collapse = '_')
-            }
-            
-            if(length(input$FI) <= 0){
-               data_bib$Screen2_FinancInc        [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_FinancInc     [values$count-1] <<- str_c(input$FI, collapse = '_')
-            }
-            
-            if(length(input$MM_Type) <= 0){t
-               data_bib$Screen2_MMType[values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_MMType[values$count-1] <<- input$MM_Type
-            }
-            
-            if(length(input$Tech_Type) <= 0){t
-               data_bib$Screen2_TechType[values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_TechType[values$count-1] <<- input$Tech_Type
-            }  
-            
-            if(length(input$EntreP_Type) <= 0){t
-               data_bib$Screen2_EntrePType[values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_EntrePType[values$count-1] <<- input$EntreP_Type
-            }
-            
-            if(length(input$EntreP_Sec) <= 0){t
-               data_bib$Screen2_EntrePSec[values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_EntrePSec[values$count-1] <<- input$EntreP_Sec
-            }
-            if(length(input$methodsGroup) <= 0){
-               data_bib$Screen2_Methods     [values$count-1] <<- 0
-            } else{
-               data_bib$Screen2_Methods     [values$count-1] <<- str_c(input$methodsGroup, collapse = '_')
-            }  
-            if(length(input$geoSelect) <= 0){
-               data_bib$Screen2_Geography       [values$count-1] <<- 0
+            # Button_Methods
+            if (length(input$Button_Methods) <= 0) {
+               data_bib$Screen2_Methods[values$count - 1] <<- 0
             } else {
-               data_bib$Screen2_Geography       [values$count-1] <<- input$geoSelect
+               data_bib$Screen2_Methods[values$count - 1] <<- str_c(input$Button_Methods, collapse = "_")
             }
+            
+            # Button_DFITheme
+            if (length(input$Button_DFITheme) <= 0) {
+               data_bib$Screen2_DFITheme[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_DFITheme[values$count - 1] <<- str_c(input$Button_DFITheme, collapse = "_")
+            } 
+            
+            # Button_GAD
+            if (length(input$Button_GAD) <= 0) {
+               data_bib$Screen2_GAD[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_GAD[values$count - 1] <<- str_c(input$Button_GAD, collapse = "_")
+            }
+            
+            # Button_TechType
+            if (length(input$Button_TechType) <= 0) {
+               data_bib$Screen2_TechType[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_TechType[values$count - 1] <<- str_c(input$Button_TechType, collapse = "_")
+            }              
+           
+            # Button_IncDev
+            if (length(input$Button_GAD) <= 0) {
+               data_bib$Screen2_IncDev[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_IncDev[values$count - 1] <<- str_c(input$Button_IncDev, collapse = "_")
+            }
+            
+            # Button_MMType
+            if (length(input$Button_MMType) <= 0) {
+               data_bib$Screen2_MMType[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_MMType[values$count - 1] <<- str_c(input$Button_MMType, collapse = "_")
+            }  
+            
+            # Button_EntrePType
+            if (length(input$Button_EntrePType) <= 0) {
+               data_bib$Screen2_EntrePType[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_EntrePType[values$count - 1] <<- str_c(input$Button_EntrePType, collapse = "_")
+            }
+            
+            # Button_EntrePSec
+            if (length(input$Button_EntrePSec) <= 0) {
+               data_bib$Screen2_EntrePSec[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_EntrePSec[values$count - 1] <<- str_c(input$Button_EntrePSec, collapse = "_")
+            }             
+            
+            # Button_Geography
+            if (length(input$Button_Geography) <= 0) {
+               data_bib$Screen2_Geography[values$count - 1] <<- 0
+            } else {
+               data_bib$Screen2_Geography[values$count - 1] <<- str_c(input$Button_Geography, collapse = "_")
+            }      
+            
+            # notes
             data_bib$Screen2_Notes       [values$count-1] <<- input$notesField
             return(YourData2)
          }
@@ -618,23 +584,19 @@ server <-  function(input,output,session){
             # Output to data_bib         
             data_bib$Screen2_Assessed   [nrow(data_bib)] <<- TRUE
             data_bib$Screen2_Reject     [nrow(data_bib)] <<- input$discardButton
-            data_bib$Screen2_DFI        [nrow(data_bib)] <<- str_c(input$DFI_Theme, collapse = '_')
-            data_bib$Screen2_GAD        [nrow(data_bib)] <<- str_c(input$GAD_Theme, collapse = '_')
-            data_bib$Screen2_MMType     [nrow(data_bib)] <<- str_c(input$MM_Type, collapse = '_')
-            data_bib$Screen2_TechType   [nrow(data_bib)] <<- str_c(input$Tech_Type, collapse = '_')
-            data_bib$Screen2_FinancInc  [nrow(data_bib)] <<- str_c(input$FI, collapse = '_')
-            data_bib$Screen2_Methods    [nrow(data_bib)] <<- str_c(input$methodsGroup, collapse = '_')
-            data_bib$Screen2_EntrePType [nrow(data_bib)] <<- str_c(input$EntreP_Type, collapse = '_')
-            data_bib$Screen2_EntrePSec  [nrow(data_bib)] <<- str_c(input$EntreP_Sec, collapse = '_')
-            data_bib$Screen2_Other      [nrow(data_bib)] <<- str_c(input$Other_Themes, collapse = '_')
-            data_bib$Screen2_Geography  [nrow(data_bib)] <<- input$geoSelect
+            data_bib$Screen2_Methods    [nrow(data_bib)] <<- str_c(input$Button_Methods, collapse = '_')
+            data_bib$Screen2_DFITheme   [nrow(data_bib)] <<- str_c(input$Button_DFITheme, collapse = '_')
+            data_bib$Screen2_GAD        [nrow(data_bib)] <<- str_c(input$Button_GAD, collapse = '_')
+            data_bib$Screen2_TechType   [nrow(data_bib)] <<- str_c(input$Button_TechType, collapse = '_')
+            data_bib$Screen2_IncDev     [nrow(data_bib)] <<- str_c(input$Button_IncDev, collapse = '_')
+            data_bib$Screen2_MMType     [nrow(data_bib)] <<- str_c(input$Button_MMType, collapse = '_')
+            data_bib$Screen2_EntrePType [nrow(data_bib)] <<- str_c(input$Button_EntrePType, collapse = '_')
+            data_bib$Screen2_EntrePSec  [nrow(data_bib)] <<- str_c(input$Button_EntrePSec, collapse = '_')
+            data_bib$Screen2_Geography  [nrow(data_bib)] <<- str_c(input$Button_Geography, collapse = '_')
             data_bib$Screen2_Notes      [nrow(data_bib)] <<- input$notesField
             
             
-            #data_bib$Screen2_TypesEntreP[nrow(data_bib)] <<- input$entrePSelect
-            #data_bib$Screen2_TypesTech  [nrow(data_bib)] <<- input$techSelect
-            #data_bib$Screen2_TypesMM    [nrow(data_bib)] <<- input$mmSelect
-            
+    
             return(YourData2)
          }
       })  
@@ -650,14 +612,15 @@ server <-  function(input,output,session){
    # More info about the screening selections
    hr()
    output$moreInfo <- renderText({
-      paste("Assessment Definitions:
-          Main Topic - select papers main topic(s) can be multiple. 
-          Tropes  - selct (if any) tropes paper is trying to convey (i.e. women can't use tech - gender imbalance)
-          Buzzwords - select all buzzwords papers has. 
-          ", 
-         "Inference - If a paper infers a certain theme but does not explicitely says it, record it in the notes"
-            ,
-            sep="\n")
+      paste(
+         "Assessment Definitions:",
+         "• Microentrepreneurs, Small-Scale Traders, Market Stalls (Using MM for transactions)",
+         "• SMEs (e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, social media, advertising, brand partnerships)",
+         "• Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for group savings, loans, collective investments)",
+         "• Accessing new entrepreneurship opportunities because of mobile platforms; livelihoods dependent on MM (e.g. Individual Influencer, Uber driver)",
+         "• Bigger Corporations",
+         sep = "\n"
+      )
    })
    hr()
    output$count <- renderUI({ HTML(paste("You have reviewed", (values$count - 2) ,"papers in this session")) })

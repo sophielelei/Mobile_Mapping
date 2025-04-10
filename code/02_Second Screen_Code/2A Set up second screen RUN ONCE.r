@@ -25,21 +25,20 @@ data_bib      <- bib_all[which(bib_all$Screen1_RejectNOTEntreP == FALSE),]
 #  If you want a TRUE/FALSE, set to NA. 
 #  If you want it to store numbers or text,set to "
 #-----------------------------------------------------------------------------------
+
 data_bib$Screen2_Assessed <- NA
 data_bib$Screen2_Reject   <- NA
+data_bib$Screen2_Methods     <- ""
 
-
-data_bib$Screen2_DFI         <- ""   
+data_bib$Screen2_DFITheme    <- ""   
 data_bib$Screen2_GAD         <- ""
-data_bib$Screen2_IncDev      <- ""
-data_bib$Screen2_FinancInc   <- ""
-data_bib$Screen2_MMType      <- ""
 data_bib$Screen2_TechType    <- ""
+data_bib$Screen2_IncDev      <- ""
+data_bib$Screen2_MMType      <- ""
 data_bib$Screen2_EntrePType  <- ""
 data_bib$Screen2_EntrePSec   <- ""
-data_bib$Screen2_Methods     <- ""
 data_bib$Screen2_Geography   <- ""
-data_bib$Screen2_Other       <- ""
+
 
 #  keep this the same
 data_bib$Screen2_Notes      <- ""
@@ -53,11 +52,40 @@ data_bib$Screen2_Notes      <- ""
 save(data_bib, file = "./data/04_Data-ready-2nd-screen/MainScreeningData_Screen2_PreProcessed.RData")
 save(data_bib, file = "./data/MainScreeningData_Screen2.rData")
 
+#----------------------------
+# Split into groups of 50
+#----------------------------
+grouped <- split(1:nrow(data_bib), ceiling(seq_along(1:nrow(data_bib)) / 50))
 
+AllDataBib <- data_bib
 
+for (n in 1:length(grouped)){
+   data_bib <- AllDataBib[grouped[[n]],]
+   
 
+   fname1 <-  paste0("./data/MainScreeningData_Screen2_SUBSET_",
+                     sprintf("%02d",min(grouped[[n]])), "-" ,
+                     max(grouped[[n]]),".RData")
+   
+   fname2 <-  paste0("./data/04_Data-ready-2nd-screen/MainScreeningData_Screen2_SUBSET_",
+                     sprintf("%02d",min(grouped[[n]])), "-" ,
+                     max(grouped[[n]]),".RData")
+   
+   save(data_bib, file = fname1)
+   save(data_bib, file = fname2)
+   
+}
 
+sample_CrossVal <- sample(1:nrow(AllDataBib),20,replace=FALSE)
+data_bib <- AllDataBib[sample_CrossVal,]
 
+fname1 <-  paste0("./data/MainScreeningData_Screen2_CROSSVAL_Sample20.RData")
+fname2 <-  paste0("./data/04_Data-ready-2nd-screen/MainScreeningData_Screen2_CROSSVAL_Sample20.RData")
+
+save(data_bib, file = fname1)
+save(data_bib, file = fname2)
+
+rm(list=ls())
 
 
 #---------------------------------------------------------------
