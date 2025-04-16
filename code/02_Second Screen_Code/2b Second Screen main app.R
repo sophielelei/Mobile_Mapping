@@ -16,7 +16,9 @@ rm(list=ls())
 #-----------------------------------------------------------------------
 #Workingfile <- "~/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2.rData"
 #Workingfile <- "/Users/hlg5155/Documents/GitHub/greatrex-lab/Project Bibliometric Mapping/Mobile_Mapping/data/MainScreeningData_Screen2.rData"
-Workingfile <- "REPLACE WITH YOURS"
+#Workingfile <- "/Users/sophielelei/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2_CROSSVAL_Sample20.RData"
+Workingfile <- "/Users/sophielelei/Desktop/mobile_money/M_mapping/data/MainScreeningData_Screen2_SUBSET_151-200.RData"
+
    
 #-----------------------------------------------------------------------
 # Make sure you have these libraries
@@ -91,7 +93,7 @@ highlight_groups <- list(
                 "payment", "remittance", "wealth", "income", "savings", 
                 "transaction", "wage gap", "wage", "financial access", 
                 "financial service", "financial inclusion", "banking", 
-                "financial", "economy", "funding")
+                "financial", "economy", "funding", "finance")
    ),
    list(
       name = "technology",
@@ -128,6 +130,15 @@ highlight_groups <- list(
                 "business", "trade", "work")
    ),
    list(
+      name = "random",
+      color = "#ffb6c1",
+      words = c("norms", "control", "barriers", 
+                "trust", "connected", "ethnographic", "review", 
+                "contextual", "mother", "men", "boys", 
+                "children", "men", "fathers", "husbands", "adolescent")
+   ),
+   
+   list(
       name = "redflags",
       color = "#fbd1d1",
       words = c("systematic review", "clinic", "agri", "farmer", "herder", 
@@ -149,7 +160,8 @@ load(Workingfile)
 #-----------------------------------------------------------------------
 # Sort so screened data is at the bottom
 #-----------------------------------------------------------------------
-data_bib <- data_bib[with(data_bib, order(Screen2_Assessed)), ]
+data_bib$Screen2_Assessed[which(is.na(data_bib$Screen2_Assessed)==TRUE)] <- FALSE
+data_bib <- data_bib[with(data_bib,order(Screen2_Assessed,decreasing=FALSE)), ]
 
 #-----------------------------------------------------------------------
 # Set up the text highlighting
@@ -206,10 +218,13 @@ ui = dashboardPage(
                                      label = "METHODS:",
                                      choices = list(
                                         "CONCEPTUAL" = c(
-                                           "Literature review"=1,
-                                           "Framework/Opinion-piece"=2
+                                           "Formal Literature review",
+                                           "Framework",
+                                           "Opinion-piece/no method"
                                         ),
                                         "QUALITATIVE" = c(
+                                           "Ethnographic, critique",
+                                           "Comparative/context assessment",
                                            "Interview",
                                            "Survey",
                                            "Focus-groups",
@@ -218,7 +233,7 @@ ui = dashboardPage(
                                         "ARCHIVE/TEXT BASED" = c(
                                            "Archival research (newspapers etc)",
                                            "Policy Analysis",
-                                           "Content/Thematic Analysis"
+                                           "Content Analysis"
                                         ),
                                         "STATISTICS" = c(
                                            "Randomised Controlled Trial",
@@ -362,11 +377,12 @@ ui = dashboardPage(
                                    shinyWidgets::pickerInput(
                                      inputId = "Button_EntrePType",
                                      label = "Entrepreneur Type:",
-                                     choices = c("Microentrepreneurs, Small-Scale Traders, Market Stalls (Using MM for transactions)" = 1, 
-                                                 "SMEs(e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, social media, advertising, brand partnerships)" = 2, 
-                                                 "Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for group savings, loans, collective investments)" = 3,
-                                                 "Accessing new entrepreneurship opportunities becasue of mobile platforms;livelihoods dependent on MM (e.g Individual Influencer/Uber driver)" = 4,
-                                                 "Bigger Corperations" = 5), 
+                                     choices = c("Microentrepreneurs" = 1, 
+                                                 "SMEs" = 2, 
+                                                 "Collective/Cooperative Entrepreneurship" = 3,
+                                                 "Accessing new entrepreneurship Individual Influencer/Uber driver" = 4,
+                                                 "Bigger Corperations" = 5, 
+                                                 "Not Specified" = 6), 
                                      multiple = TRUE,
                                      width = "fit",
                                      options = list( `multiple-separator` = " | ",
@@ -384,7 +400,8 @@ ui = dashboardPage(
                                      choices = c("Agriculture" = 1, 
                                                  "Beauty/Wellness" = 2, 
                                                  "Creative/Film" = 3,
-                                                 "Handicrafts" = 4),
+                                                 "Handicrafts" = 4, 
+                                                 "Not Specified" = 5),
                                      multiple = TRUE,
                                      width = "fit",
                                      options = list( `multiple-separator` = " | ",
@@ -615,9 +632,12 @@ server <-  function(input,output,session){
       paste(
          "Assessment Definitions:",
          "• Microentrepreneurs, Small-Scale Traders, Market Stalls (Using MM for transactions)",
-         "• SMEs (e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, social media, advertising, brand partnerships)",
-         "• Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for group savings, loans, collective investments)",
-         "• Accessing new entrepreneurship opportunities because of mobile platforms; livelihoods dependent on MM (e.g. Individual Influencer, Uber driver)",
+         "• SMEs (e.g., Salons, Own Establishment Building; Using MM for transactions, supply chains, 
+         social media, advertising, brand partnerships)",
+         "• Collective/Cooperative Entrepreneurship (Women groups selling on Etsy; Using MM for 
+         group savings, loans, collective investments)",
+         "• Accessing new entrepreneurship opportunities because of mobile platforms; 
+         livelihoods dependent on MM (e.g. Individual Influencer, Uber driver)",
          "• Bigger Corporations",
          sep = "\n"
       )

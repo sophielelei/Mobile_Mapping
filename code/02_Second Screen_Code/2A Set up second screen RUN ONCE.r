@@ -26,7 +26,7 @@ data_bib      <- bib_all[which(bib_all$Screen1_RejectNOTEntreP == FALSE),]
 #  If you want it to store numbers or text,set to "
 #-----------------------------------------------------------------------------------
 
-data_bib$Screen2_Assessed <- NA
+data_bib$Screen2_Assessed <- FALSE
 data_bib$Screen2_Reject   <- NA
 data_bib$Screen2_Methods     <- ""
 
